@@ -77,7 +77,7 @@ export class TodosComponent implements OnInit {
   }
 
   deleteTodo(todo){
-    let conf = confirm("Vous Ãªtes sur?");
+    let conf = confirm("Vous êtes sur?");
     if (!conf) return;
     this.todosService.deleteTodo(todo.id).subscribe({
       next : () => {
