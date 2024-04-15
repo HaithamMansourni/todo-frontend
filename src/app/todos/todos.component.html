@@ -1,0 +1,75 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="d-flex justify-content-between">
+                <h1 class="mb-3">Tâches</h1>
+                <div class=" nav">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <a href="https://github.com/HaithamMansourni" target="_blank"><i
+                                        class="bi bi-github"></i></a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="https://linkedin.com/in/haitham-mansourni-76b38b286"
+                                    target="_blank"><i class="bi bi-linkedin"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+            <form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Qu'est-ce qui doit être fait ?"
+                        aria-label="Task Input" formControlName="title">
+                    <button class="btn btn-outline-primary" type="button"><i class="bi bi-plus-square"></i> Ajouter une
+                        tâche</button>
+                </div>
+            </form>
+
+            <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                <button class="nav-link" id="nav-All-tab" data-bs-toggle="tab" data-bs-target="#nav-All" type="button"
+                    role="tab" aria-controls="nav-All" aria-selected="true" [class.active]="activeTab === 'All'"
+                    (click)="setActiveTab('All')">Toutes mes
+                    Tâches</button>
+                <button class="nav-link" id="nav-Active-tab" data-bs-toggle="tab" data-bs-target="#nav-Active"
+                    type="button" role="tab" aria-controls="nav-Active" aria-selected="true"
+                    [class.active]="activeTab === 'Active'" (click)="setActiveTab('Active')">Tâches En
+                    Cours</button>
+                <button class="nav-link" id="nav-Complete-tab" data-bs-toggle="tab" data-bs-target="#nav-Complete"
+                    type="button" role="tab" aria-controls="nav-Complete" aria-selected="true"
+                    [class.active]="activeTab === 'Complete'" (click)="setActiveTab('Complete')">Tâches
+                    Réalisées</button>
+
+            </ul>
+
+
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center"
+                    *ngFor="let todo of getFilteredTodos()">
+                    <span class="border  rounded p-1" [class.border-danger]="!todo.completed"
+                        [class.background-danger-light]="!todo.completed" [class.text-danger]="!todo.completed"
+                        [class.border-success]="todo.completed" [class.background-success-light]="todo.completed"
+                        [class.text-success]="todo.completed">{{todo.title}}</span>
+                    <div class="float-end d-flex align-items-center">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" [(ngModel)]="todo.completed"
+                                (change)="toggleTodoStatus(todo)">
+                        </div>
+                        <div>
+                            <button class="btn btn-danger btn-sm" (click)="deleteTodo(todo)"><i
+                                    class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+</div>
