@@ -16,6 +16,9 @@ export class TodosComponent implements OnInit {
   todos: Array<Todo>;
   todoForm: FormGroup;
 
+  isLoading:boolean=true;
+
+
   constructor(private todosService: TodosService,private formBuilder : FormBuilder) { }
 
   ngOnInit() {
@@ -40,10 +43,12 @@ export class TodosComponent implements OnInit {
   loadTodos() {
     this.todosService.getTodos().subscribe({
       next: data => {
-        this.todos = data.reverse()
+        this.todos = data.reverse();
+        this.isLoading=false;
       },
       error: err => {
         console.log(err);
+        this.isLoading=false;
       }
     });;
   }
